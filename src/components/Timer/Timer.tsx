@@ -1,3 +1,4 @@
+import Button from "@components/Timer/Button";
 
 function Timer() {
   return (
@@ -28,48 +29,18 @@ function Timer() {
       <div className="w-full h-px bg-[#1e1e1e] mb-8" />
 
       <div className="grid grid-cols-3 gap-2">
-        <button
-          aria-label="Start"
-          className="
-          py-[14px] text-center
-          font-['Oswald'] text-[12px] font-normal tracking-[0.25em] uppercase
-          border transition-all duration-150 cursor-pointer
-          bg-[#e8ff00] text-[#0a0a0a] border-[#e8ff00]
-          hover:bg-[#f5ff4d] hover:border-[#f5ff4d]
-          active:opacity-90
-          disabled:opacity-30 disabled:cursor-not-allowed
-        "
-        >
+        <Button mode="start" aria-label="Start">
           Start
-        </button>
-        <button
-          aria-label="Pause"
-          className="
-          py-[14px] text-center
-          font-['Oswald'] text-[12px] font-normal tracking-[0.25em] uppercase
-          border transition-all duration-150 cursor-pointer
-          bg-transparent text-[#e8ff00] border-[#e8ff00]
-          hover:enabled:bg-[rgba(232,255,0,0.06)]
-          active:opacity-90
-          disabled:text-[#333] disabled:border-[#222] disabled:cursor-not-allowed
-        "
+        </Button>
+        <Button
+          aria-label="Pause" mode="pause"
         >
           Pause
-        </button>
-        <button
-          aria-label="Reset"
-          className="
-          py-[14px] text-center
-          font-['Oswald'] text-[12px] font-normal tracking-[0.25em] uppercase
-          border transition-all duration-150 cursor-pointer
-          bg-transparent text-[#555] border-[#222]
-          hover:enabled:text-[#aaa] hover:enabled:border-[#444]
-          active:opacity-90
-          disabled:opacity-30 disabled:cursor-not-allowed
-        "
-        >
+        </Button>
+        <Button
+          aria-label="Reset" mode="reset">
           Reset
-        </button>
+        </Button>
       </div>
       <div className="flex items-center gap-2 mt-6">
         <div
