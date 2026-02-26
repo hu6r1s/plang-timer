@@ -7,6 +7,15 @@
       ],
       "@components/*": [
         "src/components/*"
+      ],
+      "@store/*": [
+        "src/store/*"
+      ],
+      "@hooks/*": [
+        "src/hooks/*"
+      ],
+      "@utils/*": [
+        "src/utils/*"
       ]
     }
   }
