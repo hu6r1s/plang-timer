@@ -1,4 +1,5 @@
 import { useTimerStore } from "@store/timerStore";
+import { playGoalReachedSound } from "@utils/sound";
 import { useEffect, useRef } from "react";
 import { TimerStatus } from "src/types/timer";
 
@@ -39,6 +40,7 @@ function useTimer() {
 
         if (goalMs !== null && elapsed >= goalMs) {
           tick(goalMs);
+          playGoalReachedSound();
           complete();
           return;
         }
