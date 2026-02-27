@@ -24,7 +24,7 @@ function Timer() {
     <div className="relative w-[420px] bg-[#111] border border-[#222] px-10 pt-14 pb-12 shadow-[0_0_0_1px_#1a1a1a,0_40px_80px_rgba(0,0,0,0.6)]">
       <TimerStatusBar />
       <TimerSettingButton onClick={() => setIsModalOpen(true)} />
-      <TimerDisplay status={status} elapsedMs={elapsedMs} />
+      <TimerDisplay status={status} elapsedMs={elapsedMs} goalMs={goalMs} />
 
       <div className="w-full h-px bg-[#1e1e1e] mb-8" />
 
