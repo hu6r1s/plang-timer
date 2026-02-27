@@ -7,6 +7,9 @@ interface TimerStore extends TimerState {
   start: () => void;
   pause: () => void;
   reset: () => void;
+  setGoal: (ms: number | null) => void;
+  complete: () => void;
+  goalMs: number | null;
 }
 
 export const useTimerStore = create<TimerStore>()(
@@ -15,6 +18,7 @@ export const useTimerStore = create<TimerStore>()(
       status: TimerStatus.IDLE,
       elapsedMs: 0,
       startedAt: null,
+      goalMs: null,
 
       start: () => {
         const { status } = get();
@@ -53,6 +57,18 @@ export const useTimerStore = create<TimerStore>()(
 
       tick: (elapsedMs: number) => {
         set({ elapsedMs }, false, "timer/tick");
+      },
+
+      setGoal: (ms: number | null) => {
+        set({ goalMs: ms }, false, "timer/setGoal");
+      },
+
+      complete: () => {
+        set(
+          { status: TimerStatus.IDLE, startedAt: null },
+          false,
+          "timer/complete"
+        );
       },
     }),
     { name: "TimerStore" }

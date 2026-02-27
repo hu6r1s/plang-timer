@@ -1,7 +1,9 @@
 import Button from "@components/Timer/Button";
 import { formatMs, formatTime } from "@utils/formatTime";
+import { useState } from "react";
 import useTimer from "src/hooks/useTimer";
 import { TimerStatus, TimerStatusType } from "src/types/timer";
+import { TimerSettingModal } from "./TimerSettingModal";
 
 const STATUS_LABEL: Record<TimerStatusType, string> = {
   [TimerStatus.IDLE]: "Idle",
@@ -10,7 +12,8 @@ const STATUS_LABEL: Record<TimerStatusType, string> = {
 };
 
 function Timer() {
-  const { status, elapsedMs, start, pause, reset } = useTimer();
+  const { status, elapsedMs, start, pause, reset, setGoal, goalMs } = useTimer();
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const isRunning = status === TimerStatus.RUNNING;
   const isPaused = status === TimerStatus.PAUSED;
@@ -43,6 +46,24 @@ function Timer() {
           className="h-full bg-[#e8ff00]"
         />
       </div>
+      <button
+        onClick={() => setIsModalOpen(true)}
+        aria-label="Open settings"
+        className="absolute top-7 right-3 text-[#333] hover:text-[#e8ff00] transition-colors duration-150 cursor-pointer"
+      >
+        <svg width="32" height="32" viewBox="0 0 16 16" fill="none">
+          <path
+            d="M8 10a2 2 0 100-4 2 2 0 000 4z"
+            stroke="currentColor"
+            strokeWidth="1.2"
+          />
+          <path
+            d="M13.3 6.6l-.8-.5a5.1 5.1 0 000-1.2l.8-.5a.5.5 0 00.2-.6l-.8-1.4a.5.5 0 00-.6-.2l-.9.4a5 5 0 00-1-.6L10 1.5a.5.5 0 00-.5-.5H8a.5.5 0 00-.5.4l-.2 1a5 5 0 00-1 .6l-.9-.4a.5.5 0 00-.6.2L4 4.2a.5.5 0 00.2.6l.8.5a5.1 5.1 0 000 1.2l-.8.5a.5.5 0 00-.2.6l.8 1.4a.5.5 0 00.6.2l.9-.4a5 5 0 001 .6l.2 1a.5.5 0 00.5.4h1.5a.5.5 0 00.5-.4l.2-1a5 5 0 001-.6l.9.4a.5.5 0 00.6-.2l.8-1.4a.5.5 0 00-.2-.6z"
+            stroke="currentColor"
+            strokeWidth="1.2"
+          />
+        </svg>
+      </button>
       <div>
         <p className="font-['Oswald'] text-[10px] font-normal tracking-[0.3em] text-[#444] uppercase mb-4">
           Plang Timer
@@ -95,6 +116,13 @@ function Timer() {
           {STATUS_LABEL[status]}
         </span>
       </div>
+
+      <TimerSettingModal
+        isOpen={isModalOpen}
+        currentGoalMs={goalMs}
+        onSave={setGoal}
+        onClose={() => setIsModalOpen(false)}
+      />
     </div>
   );
 }

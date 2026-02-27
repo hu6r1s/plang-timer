@@ -3,8 +3,18 @@ import { useEffect, useRef } from "react";
 import { TimerStatus } from "src/types/timer";
 
 function useTimer() {
-  const { status, elapsedMs, startedAt, start, pause, reset, tick } =
-    useTimerStore();
+  const {
+    status,
+    elapsedMs,
+    startedAt,
+    start,
+    pause,
+    reset,
+    tick,
+    setGoal,
+    complete,
+    goalMs,
+  } = useTimerStore();
 
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const baseElapsedRef = useRef<number>(0);
@@ -26,7 +36,13 @@ function useTimer() {
         const now = performance.now();
         const elapsed =
           baseElapsedRef.current + (now - (startedAtRef.current ?? now));
-        console.log(elapsed);
+
+        if (goalMs !== null && elapsed >= goalMs) {
+          tick(goalMs);
+          complete();
+          return;
+        }
+
         tick(elapsed);
       }, 100);
     }
@@ -45,7 +61,7 @@ function useTimer() {
     return () => clearTick();
   }, [status]);
 
-  return { status, elapsedMs, start, pause, reset };
+  return { status, elapsedMs, start, pause, reset, setGoal, goalMs };
 }
 
 export default useTimer;
