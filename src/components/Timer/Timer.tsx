@@ -9,6 +9,7 @@ const STATUS_LABEL: Record<TimerStatusType, string> = {
   [TimerStatus.IDLE]: "Idle",
   [TimerStatus.RUNNING]: "Running",
   [TimerStatus.PAUSED]: "Paused",
+  [TimerStatus.COMPLETED]: "Completed",
 };
 
 function Timer() {
@@ -18,6 +19,7 @@ function Timer() {
   const isRunning = status === TimerStatus.RUNNING;
   const isPaused = status === TimerStatus.PAUSED;
   const isIdle = status === TimerStatus.IDLE;
+  const isCompleted = status === TimerStatus.COMPLETED;
   const isActive = isRunning || isPaused;
 
   const clockColor = isRunning
@@ -88,7 +90,7 @@ function Timer() {
         <Button
           mode="start"
           aria-label={isPaused ? "Resume" : "Start"}
-          disabled={isRunning}
+          disabled={isRunning || isCompleted}
           onClick={start}
         >
           {isPaused ? "Resume" : "Start"}

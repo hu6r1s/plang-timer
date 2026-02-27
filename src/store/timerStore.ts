@@ -65,7 +65,7 @@ export const useTimerStore = create<TimerStore>()(
 
       complete: () => {
         set(
-          { status: TimerStatus.IDLE, startedAt: null },
+          { status: TimerStatus.COMPLETED, startedAt: null },
           false,
           "timer/complete"
         );

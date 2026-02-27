@@ -54,7 +54,7 @@ function useTimer() {
       tick(elapsedMs);
     }
 
-    if (status === TimerStatus.IDLE) {
+    if (status === TimerStatus.IDLE || status === TimerStatus.COMPLETED) {
       clearTick();
       baseElapsedRef.current = 0;
       startedAtRef.current = null;
