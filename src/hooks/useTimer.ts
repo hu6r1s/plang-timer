@@ -37,6 +37,7 @@ function useTimer() {
         const now = performance.now();
         const elapsed =
           baseElapsedRef.current + (now - (startedAtRef.current ?? now));
+        const { goalMs } = useTimerStore.getState();
 
         if (goalMs !== null && elapsed >= goalMs) {
           tick(goalMs);
