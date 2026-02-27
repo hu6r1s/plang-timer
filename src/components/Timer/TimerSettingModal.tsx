@@ -35,7 +35,7 @@ export function TimerSettingModal({ isOpen, currentGoalMs, onSave, onClose }: Pr
   const totalSeconds = hours * 3600 + minutes * 60 + seconds;
 
   const handleSave = () => {
-    if (status === TimerStatus.PAUSED || status === TimerStatus.RUNNING) {
+    if (status === TimerStatus.PAUSED || status === TimerStatus.RUNNING || status === TimerStatus.COMPLETED) {
       reset()
     }
     onSave(totalSeconds > 0 ? totalSeconds * 1000 : null);
@@ -46,6 +46,8 @@ export function TimerSettingModal({ isOpen, currentGoalMs, onSave, onClose }: Pr
     onSave(null);
     onClose();
   };
+
+  const showWarning = status === TimerStatus.RUNNING || status === TimerStatus.PAUSED || status === TimerStatus.COMPLETED;
 
   const inputClass = `
     w-full bg-[#0a0a0a] border border-[#2a2a2a] text-[#f0f0f0]
@@ -78,7 +80,7 @@ export function TimerSettingModal({ isOpen, currentGoalMs, onSave, onClose }: Pr
           </button>
         </div>
         <div className="h-4">
-          {(status === TimerStatus.RUNNING || status === TimerStatus.PAUSED) && (
+          {showWarning && (
             <p className="font-['IBM_Plex_Mono'] text-[10px] text-[#e8ff00] tracking-[0.1em]">
               ※ 저장 시 타이머가 초기화됩니다
             </p>
