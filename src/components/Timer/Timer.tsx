@@ -4,7 +4,7 @@ import useTimer from "src/hooks/useTimer";
 import { TimerStatus, TimerStatusType } from "src/types/timer";
 
 const STATUS_LABEL: Record<TimerStatusType, string> = {
-  [TimerStatus.IDLE]: "Standby",
+  [TimerStatus.IDLE]: "Idle",
   [TimerStatus.RUNNING]: "Running",
   [TimerStatus.PAUSED]: "Paused",
 };
