@@ -20,31 +20,6 @@ function Timer() {
   const { status, elapsedMs, start, pause, reset, setGoal, goalMs } = useTimer();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  const isRunning = status === TimerStatus.RUNNING;
-  const isPaused = status === TimerStatus.PAUSED;
-  const isIdle = status === TimerStatus.IDLE;
-  const isCompleted = status === TimerStatus.COMPLETED;
-  const isActive = isRunning || isPaused;
-
-  const clockColor = isRunning
-    ? "text-white"
-    : isPaused
-      ? "text-[#888]"
-      : "text-[#f0f0f0]";
-
-  const msColor = isRunning ? "text-[#e8ff00]" : "text-[#333]";
-
-  const dotColor = isRunning
-    ? "bg-[#e8ff00]"
-    : isPaused
-      ? "bg-[#555]"
-      : "bg-[#333]";
-
-  const textColor = isRunning
-    ? "text-[#e8ff00]"
-    : isPaused
-      ? "text-[#555]"
-      : "text-[#333]";
   return (
     <div className="relative w-[420px] bg-[#111] border border-[#222] px-10 pt-14 pb-12 shadow-[0_0_0_1px_#1a1a1a,0_40px_80px_rgba(0,0,0,0.6)]">
       <TimerStatusBar />
@@ -59,7 +34,7 @@ function Timer() {
         onPause={pause}
         onReset={reset}
       />
-      
+
       <TimerIndicator status={status} />
 
       <TimerSettingModal
